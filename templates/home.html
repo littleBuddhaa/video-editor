@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Basic video trimmer</title>
+    </head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles/style.css') }}">
+
+
+
+
+    <body>
+    <form action = "/search" class = "class1"  name = "url_form" method = "POST">
+        <span class = "cb" >URL Of the video to trim</span>  
+        <input class = "regtext" type = "text" name = "url" id = "url" required><br>
+        <input type = "submit" value = "Upload"> 
+        </form>
+        </body>
+</html>
