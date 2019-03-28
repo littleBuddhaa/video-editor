@@ -17,11 +17,14 @@ def search():
     if request.method == 'POST':
         url = (request.form['url'])
         print ('Downloading Started..')
-        name  = 'mysample.webm'
+        up = 'fetching failed'
+        name  = 'uploads/mysample.webm'
         urllib.request.urlretrieve(url, name)
         print ('Download Completed!')
+        up = 'fetched succesfully'
+
         
-    return redirect(url_for('index'))
+    return render_template('home.html',var = up)
 
     
 
