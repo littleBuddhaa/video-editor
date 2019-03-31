@@ -14,10 +14,31 @@
     <form action = "/search" class = "class1"  name = "url_form" method = "POST">
         <span class = "cb" >URL Of the video to trim</span>  
         <input class = "regtext" type = "text" name = "url" id = "url" required><br>
+        <p>Ex. : https://upload.wikimedia.org/wikipedia/commons/3/3b/2_a%C3%B1os_-_Sigue_instrucciones_de_dos_pasos.webm</p>
         <input type = "submit" value = "Upload"> 
+    </form>
+
+
+
+        {% if var== 1 %}
+        <p>Fetched Succesfully!</p>
+        <video controls = "controls"src = {{url}} type = "video/webm"></video>
+        <p>Total duration of you video in seconds  :   {{dur}}</p>
+
+        <form action = "/crop" class = "class1"  name = "crom_form" method = "POST">
+            <span class = "cb" >Crop from(in seconds) </span>  
+            <input class = "regtext" type = "text" name = "start" id = "start" required><br>
+            <span class = "cb" >Crop till(in seconds) </span> 
+            <input class = "regtext" type = "text" name = "end" id = "end" required><br>
+            <input type = "submit" value = "Crop"> 
         </form>
+        {% endif %}
 
+        {% if err== 0 %}
+        <p>Cropped Successfully! </p>
+        <video controls = "controls"src ={{crurl}} type = "video/webm"></video>
+        {% endif %}
 
-        {{var}}
+       
         </body>
 </html>
