@@ -44,14 +44,15 @@ def crop():
         print (start,end)
         hrst = (datetime.timedelta(seconds=int(start)))
         hrend = (datetime.timedelta(seconds=int(end)))
-        crurl = '../static/cropped/new.webm'
+        print(hrst , hrend)
+        crurl = 'static/cropped/new.webm'
         try:
             print('******************************')
             print(session_url)
             #subprocess.run(['ffmpeg_extract_subclip(', session_url ,',', start,',', end,',', 'targetname="/downloads/cropped.webm")'])
             #subprocess.run(['ffmpeg_extract_subclip( session_url, start, end, targetname="/downloads/cropped.webm")'])
-            #subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), '-c:v' ,  'copy' , '-c:a' , 'copy' ,  'static/cropped/new.webm'])
-            subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), 'static/cropped/new.webm'])
+            subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), '-c:v' ,  'copy' , '-c:a' , 'copy' ,  'static/cropped/new.webm'])
+            #subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), 'static/cropped/new.webm'])
             dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', 'static/cropped/new.webm']))
 
             err = 0
@@ -60,7 +61,7 @@ def crop():
             err = 1
 
 
-    return render_template('home.html',err = err,crurl = crurl)
+    return render_template('home.html',err = err,crurl = crurl, d = dur)
 
     
 
