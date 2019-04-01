@@ -1,0 +1,29 @@
+.mid{
+    margin-left: 30%;
+}
+.head{
+    font-size: 30px;
+}
+.tb{
+    min-width: 300px;
+    width: 300px;
+    margin-left: 30px;
+}
+.up{
+    margin-left: 25%;
+    font-size: 20px;
+    padding: 5px;
+}
+.myvideo{
+    padding: 20px;
+}
+.flash{
+    color:green;
+    margin-left:22%;
+}
+.dur{
+    font-size: 18px;
+    margin-left: 15%;
+    font-weight: bold;
+    text-decoration: underline;
+}

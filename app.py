@@ -30,16 +30,18 @@ def search():
         urllib.request.urlretrieve(url, name)
         print ('Download Completed!')
         up = 1
-        dur = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', name])
+        dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', name]))
+        #dur = subprocess.run(['ffprobe', '-i', name, '-show_format' ,'|','grep duration'])
         print (dur)
+        tem = str(dur)
         
-    return render_template('home.html',var = up,url = url,dur = str(dur))
+    return render_template('home.html',var = up,url = url,dur = tem)
 @app.route('/crop',methods = ['GET','POST'])
 def crop():
     if request.method == 'POST':
         start = (request.form['start'])
         end  = (request.form['end'])
-        print ('user entered from (%f) to (%f)',(start,end))
+        print (start,end)
         hrst = (datetime.timedelta(seconds=int(start)))
         hrend = (datetime.timedelta(seconds=int(end)))
         crurl = '../static/cropped/new.webm'
@@ -48,8 +50,9 @@ def crop():
             print(session_url)
             #subprocess.run(['ffmpeg_extract_subclip(', session_url ,',', start,',', end,',', 'targetname="/downloads/cropped.webm")'])
             #subprocess.run(['ffmpeg_extract_subclip( session_url, start, end, targetname="/downloads/cropped.webm")'])
-            #subprocess.run(['ffmpeg', '-i' , 'uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), '-c:v' ,  'copy' , '-c:a' , 'copy' ,  'cropped/new.webm'])
+            #subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), '-c:v' ,  'copy' , '-c:a' , 'copy' ,  'static/cropped/new.webm'])
             subprocess.run(['ffmpeg', '-i' , 'static/uploads/mysample.webm', '-ss' ,  str(hrst), '-to' , str(hrend), 'static/cropped/new.webm'])
+            dur = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', 'static/cropped/new.webm']))
 
             err = 0
         except subprocess.CalledProcessError as e:
